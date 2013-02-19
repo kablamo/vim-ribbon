@@ -34,7 +34,7 @@ function! s:Ribbon()
     endif
 
     " load git output into the Ribbon buffer
-    let l:cmd = 'silent 0read ! git log --pretty=format:''\%an (\%cr) \%p:\%h\%n\%s'' --stat --no-merges --reverse --topo-order _ribbon..origin/master'
+    let l:cmd = 'silent 0read ! git log --pretty=format:''\%an (\%cr) \%p:\%h\%n\%s'' --name-only --no-merges --reverse --topo-order _ribbon..origin/master'
     execute l:cmd
     normal 1G
 
@@ -69,7 +69,7 @@ function! ribbon#diff()
     " show rev1:file
     execute 'rightbelow vsplit | Git! show ' . l:rev[1] . ':' . l:filename
     let l:bufnr1 = bufnr("")
-    let l:cmd='nnoremap <buffer> <silent> q :' . l:bufnr0 . 'bunload<cr>:' . l:bufnr1 . 'bunload<cr>'
+    let l:cmd='nmap <buffer> <silent> q :' . l:bufnr0 . 'bunload<cr>:' . l:bufnr1 . 'bunload<cr>' . l::oldLineNr . 'G'
 
     " show diff
     diffthis
@@ -85,6 +85,7 @@ endfunction
 
 function! s:RibbonSave()
     silent !git tag --force _ribbon origin/master
+    echo "Updated tag '_ribbon'"
     redraw!
 endfunction
 
