@@ -69,7 +69,7 @@ function! ribbon#diff()
     " show rev1:file
     execute 'rightbelow vsplit | Git! show ' . l:rev[1] . ':' . l:filename
     let l:bufnr1 = bufnr("")
-    let l:cmd='nmap <buffer> <silent> q :' . l:bufnr0 . 'bunload<cr>:' . l:bufnr1 . 'bunload<cr>' . l::oldLineNr . 'G'
+    let l:cmd='nmap <buffer> <silent> q :' . l:bufnr0 . 'bunload<cr>:' . l:bufnr1 . 'bunload<cr>' . (l:oldLineNr - 1) . 'G<cr>'
 
     " show diff
     diffthis
