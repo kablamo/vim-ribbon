@@ -60,7 +60,7 @@ function! ribbon#diff()
     let l:line      = getline(l:lineNr)
     let l:revisions = substitute(l:line, '.*) \(\w\+:\w\+\)$', '\=submatch(1)', "")
     let l:rev       = split(l:revisions, ':')
-    execute 'normal ' . l:oldLineNr . 'G'
+    execute 'normal ' . l:oldLineNr . 'G<cr>'
 
     " show rev0:file
     execute 'Git! show ' . l:rev[0] . ':' . l:filename
